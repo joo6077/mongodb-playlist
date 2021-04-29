@@ -30,7 +30,11 @@ describe('Updating records', () => {
     })
 
     it('Increments the weight by 1', (done) => {
-        MarioChar.updateOne({}, {$inc: { weight: 1 }})
-            
+        MarioChar.update({}, {$inc: { weight: 1 }})
+            MarioChar.findOne({ name: 'Mario' })
+                .then((record) => {
+                    assert(record.weight === 51)
+                    done()
+                })
     })
 })
